@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">weather_alerts</string>
+    <string name="main_activity_title">weather_alerts</string>
+</resources>
