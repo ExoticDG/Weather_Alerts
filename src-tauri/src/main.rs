@@ -1,37 +1,29 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-// wxrs/src/bin/ch3.rs
-pub fn get_air_pollution(lat: f32, lon: f32) -> String {
-    let location = "WI";
 
 
-    let url = format!(
-        "https://api.weather.gov/alerts/active.atom?area={}",
-        location
+pub fn get_alerts(lat: f32, lon: f32) -> String {
+
+
+    let api = format!(
+        "https://api.weather.gov/alerts/active.atom?point={lat},{lon}",
+        
     );
-    reqwest::blocking::get(url)
+    reqwest::blocking::get(api, )
         .expect("request failed")
         .text()
         .expect("body failed")
 }
 // User-Agent: (myweatherapp.com, contact@myweatherapp.com)
 fn main() {
-    let usage = format!("Usage: {} [lat] [lon]", std::env::args().next().unwrap());
+    let _usage = format!("Usage: {} [lat] [lon]", std::env::args().next().unwrap());
 
-    let lat = std::env::args()
-        .nth(1)
-        .expect(&usage)
-        .parse::<f32>()
-        .expect(&usage);
+    let lat = 1234.3465;
 
-    let lon = std::env::args()
-        .nth(2)
-        .expect(&usage)
-        .parse::<f32>()
-        .expect(&usage);
+    let lon = 1345.23456;
 
-    let body = get_air_pollution(lat, lon);
+    let body = get_alerts(lat, lon);
     println!("{}", body);
     weather_alerts_lib::run();
 }
