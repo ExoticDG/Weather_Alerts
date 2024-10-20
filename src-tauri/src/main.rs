@@ -6,22 +6,33 @@
 pub fn get_alerts(lat: f32, lon: f32) -> String {
 
 
+    // https://api.weather.gov/alerts/active?point=34.3,-104.296
+
     let api = format!(
-        "https://api.weather.gov/alerts/active.atom?point={lat},{lon}",
+        "https://api.weather.gov/alerts/active?point={lat},{lon}",
         
     );
-    reqwest::blocking::get(api, )
-        .expect("request failed")
-        .text()
-        .expect("body failed")
+
+    println!("{api}");
+
+    // reqwest::blocking::get(api)
+    //     .header("User-Agent","wallofthrones")
+    //     .expect("request failed")
+    //     .text()
+    //     .expect("body failed")
+
+    let client = reqwest::blocking::Client::new();
+    let resp = client.get(api).header("User-Agent","wallofthrones").send();
+    resp.expect("didn't work bro").text().expect("nope")
+    
 }
 // User-Agent: (myweatherapp.com, contact@myweatherapp.com)
 fn main() {
     let _usage = format!("Usage: {} [lat] [lon]", std::env::args().next().unwrap());
 
-    let lat = 1234.3465;
+    let lat = 34.3;
 
-    let lon = 1345.23456;
+    let lon = -104.296;
 
     let body = get_alerts(lat, lon);
     println!("{}", body);
