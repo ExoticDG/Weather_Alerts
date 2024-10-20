@@ -28,6 +28,11 @@ pub fn get_alerts(lat: f32, lon: f32) -> String {
 }
 // User-Agent: (myweatherapp.com, contact@myweatherapp.com)
 fn main() {
+
+  
+
+    
+    
     let _usage = format!("Usage: {} [lat] [lon]", std::env::args().next().unwrap());
 
     let lat = 34.3;
@@ -37,5 +42,12 @@ fn main() {
     let body = get_alerts(lat, lon);
     println!("{}", body);
     weather_alerts_lib::run();
+
+    tauri::Builder::default()
+        .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_geolocation::init())
+        .plugin(tauri_plugin_notification::init())
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }
 
