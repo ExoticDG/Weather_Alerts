@@ -1,6 +1,5 @@
 
-#This repo is not deprocated in favor of a different codeing language (kolten) Tauri had almsot no documentation ln the plugins that make this work. I am swiching development to Kolten in Android Studio
- a new repo will be made.
+# This repo is not deprocated in favor of a different codeing language (kolten) Tauri had almsot no documentation ln the plugins that make this work. I am swiching development to Kolten in Android Studio a new repo will be made.
 
 
 
